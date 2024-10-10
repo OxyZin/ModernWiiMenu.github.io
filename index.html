@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wii Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #c9e9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        #menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px); /* Imita o efeito translúcido */
+            padding: 20px;
+            border-radius: 20px;
+        }
+        #menu {
+            width: 900px;
+            height: 500px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .channel {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 3px solid rgba(0, 0, 0, 0.1); /* Borda mais marcada */
+        }
+        .channel:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+        #bottom-bar {
+            width: 900px;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding: 0 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #bottom-bar div {
+            font-size: 22px;
+            color: #333;
+            font-family: 'Verdana', sans-serif;
+        }
+        #date, #time {
+            font-weight: bold;
+        }
+
+        #Shop {
+        color: rgb(0, 183, 255);
+        font-size: 12px;
+        display: flex; /* Torna o contêiner flexível */
+        flex-direction: column; /* Alinha a imagem e o texto em coluna */
+        justify-content: flex-start; /* Alinha os itens no topo da div */
+        align-items: center; /* Centraliza horizontalmente */
+        background-color: white; /* Fundo para visualização */
+        border-radius: 15px; /* Bordas arredondadas */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        #shop, img {
+        height: 70px; /* Altura da imagem */
+        margin-top: 30px;
+        }
+
+        #shop, h2 {
+        margin-top: 10px; /* Espaçamento entre a imagem e o texto */
+        margin-bottom: 0; /* Remove margem inferior do h2 */
+        }
+
+        #Disc, img{
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div id="menu-container">
+        <div id="menu">
+            <div class="channel" id="Disc"><img src="/img/disc.png" height="40px" alt="Disc Channel icon"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel" id="Shop">
+                <img src="/img/image.png" height="40px" alt="Wii Shop Channel icon">
+                <h2>Wii Shop channel</h2>
+            </div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+            <div class="channel"></div>
+        </div>
+        <div id="bottom-bar">
+            <div id="date">Fri 3/29</div>
+            <div id="time">2:07 PM</div>
+        </div>
+        <div class="actionbuttons">
+
+        </div>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const timeString = `${hours % 12 || 12}:${minutes < 10 ? '0' + minutes : minutes} ${hours >= 12 ? 'PM' : 'AM'}`;
+            const dateString = now.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric' });
+
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
